@@ -1,0 +1,81 @@
+<div class="p-7 max-w-[800px]">
+  <div class="mb-6">
+    <h1 class="text-[22px] font-bold text-gray-900">Settings</h1>
+    <p class="text-[13px] text-gray-500 mt-1">Configure your account preferences and relay network parameters.</p>
+  </div>
+
+  <!-- Profile Section -->
+  <div class="bg-white border border-gray-200 p-6 mb-5">
+    <div class="text-[14px] font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-100">Profile Information</div>
+    <div class="grid grid-cols-2 gap-5">
+      <div>
+        <label class="form-label">Full Name</label>
+        <input [(ngModel)]="profile.name" class="form-input"/>
+      </div>
+      <div>
+        <label class="form-label">Email Address</label>
+        <input [(ngModel)]="profile.email" class="form-input"/>
+      </div>
+      <div>
+        <label class="form-label">Role</label>
+        <input [(ngModel)]="profile.role" class="form-input" readonly/>
+      </div>
+    </div>
+  </div>
+
+  <!-- Network Section -->
+  <div class="bg-white border border-gray-200 p-6 mb-5">
+    <div class="text-[14px] font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-100">Network Configuration</div>
+    <div class="grid grid-cols-2 gap-5">
+      <div>
+        <label class="form-label">Connection Timeout (s)</label>
+        <input [(ngModel)]="network.timeout" type="number" class="form-input"/>
+      </div>
+      <div>
+        <label class="form-label">Max Retries</label>
+        <input [(ngModel)]="network.retries" type="number" class="form-input"/>
+      </div>
+      <div>
+        <label class="form-label">Encryption Level</label>
+        <select [(ngModel)]="network.encryptionLevel" class="form-select">
+          <option>AES-256</option><option>AES-128</option>
+        </select>
+      </div>
+      <div>
+        <label class="form-label">Audit Frequency</label>
+        <select [(ngModel)]="network.auditFrequency" class="form-select">
+          <option>Real-time</option><option>Hourly</option><option>Daily</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notifications -->
+  <div class="bg-white border border-gray-200 p-6 mb-6">
+    <div class="text-[14px] font-semibold text-gray-900 mb-4 pb-3 border-b border-gray-100">Notifications</div>
+    <div class="space-y-4">
+      @for (item of notifItems; track item.key) {
+        <div class="flex items-center justify-between">
+          <div>
+            <div class="text-[13px] font-medium text-gray-800">{{ item.label }}</div>
+            <div class="text-[12px] text-gray-400">{{ item.desc }}</div>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" [(ngModel)]="notifications[item.key]" [name]="item.key" class="sr-only peer"/>
+            <div class="w-9 h-5 bg-gray-200 peer-checked:bg-black rounded-full transition-colors duration-200"></div>
+            <div class="absolute left-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform duration-200 peer-checked:translate-x-4"></div>
+          </label>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="flex gap-3">
+    <button class="bg-black text-white text-[13px] font-semibold px-6 py-2.5 hover:bg-gray-800 transition-colors">
+      Save Changes
+    </button>
+    <button class="border border-gray-200 text-[13px] text-gray-600 px-6 py-2.5 hover:bg-gray-50 transition-colors">
+      Reset to Defaults
+    </button>
+  </div>
+</div>

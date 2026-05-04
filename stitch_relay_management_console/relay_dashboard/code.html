@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#dec29a",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-container": "#131b2e",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#515f74",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#000000",
+                        "on-surface-variant": "#45464d",
+                        "surface-container-highest": "#e4e2e4",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "primary-fixed-dim": "#bec6e0",
+                        "surface-bright": "#fcf8fa",
+                        "inverse-primary": "#bec6e0",
+                        "surface-container": "#f0edef",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "inverse-on-surface": "#f3f0f2",
+                        "secondary-container": "#d5e3fd",
+                        "on-tertiary-fixed-variant": "#574425",
+                        "on-tertiary-fixed": "#271901",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#fcdeb5",
+                        "on-secondary-container": "#57657b",
+                        "surface": "#fcf8fa",
+                        "on-primary-fixed": "#131b2e",
+                        "on-tertiary-container": "#98805d",
+                        "background": "#fcf8fa",
+                        "surface-tint": "#565e74",
+                        "outline-variant": "#c6c6cd",
+                        "on-primary-container": "#7c839b",
+                        "primary": "#000000",
+                        "inverse-surface": "#303032",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#dcd9db",
+                        "surface-variant": "#e4e2e4",
+                        "primary-fixed": "#dae2fd",
+                        "surface-container-high": "#eae7e9",
+                        "secondary-fixed": "#d5e3fd",
+                        "on-surface": "#1b1b1d",
+                        "surface-container-low": "#f6f3f5",
+                        "tertiary-container": "#271901",
+                        "on-error": "#ffffff",
+                        "outline": "#76777d",
+                        "on-background": "#1b1b1d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "sm": "8px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "xl": "48px",
+                        "margin": "32px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "h1": ["Inter"],
+                        "mono": ["monospace"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "h3": ["Inter"],
+                        "h2": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "mono": ["13px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "h3": ["20px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased">
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-64 border-r fixed left-0 top-0 bg-slate-50 flex flex-col py-8 px-4 gap-2 border-slate-200 z-50">
+<div class="px-2 mb-8">
+<div class="font-black text-xl text-slate-900 tracking-tighter uppercase">Executive Control</div>
+<div class="text-xs text-slate-500 font-medium tracking-widest uppercase">Data Relay Mgmt</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-900 font-bold border-r-2 border-slate-900 bg-white hover:bg-slate-200/50 transition-all scale-[0.98] active:scale-95" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="settings_input_component">settings_input_component</span>
+<span class="font-inter text-sm font-medium">Relay Clusters</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-slate-200/50 transition-all scale-[0.98] active:scale-95" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="query_stats">query_stats</span>
+<span class="font-inter text-sm font-medium">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-slate-200/50 transition-all scale-[0.98] active:scale-95" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="history_edu">history_edu</span>
+<span class="font-inter text-sm font-medium">Audit Logs</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-slate-200/50 transition-all scale-[0.98] active:scale-95" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="tune">tune</span>
+<span class="font-inter text-sm font-medium">Configuration</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-slate-200/50 transition-all scale-[0.98] active:scale-95" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="settings">settings</span>
+<span class="font-inter text-sm font-medium">Settings</span>
+</a>
+</nav>
+<button class="mt-auto bg-slate-900 text-white py-3 px-4 rounded font-medium text-sm flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+            Add New Relay
+        </button>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar Shell -->
+<header class="flex justify-between items-center w-full px-6 py-3 h-16 bg-white border-b border-slate-200 sticky top-0 z-40">
+<div class="flex items-center gap-8">
+<span class="font-bold text-lg tracking-tighter text-slate-900">RelayOS</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-slate-900 font-semibold font-inter text-sm antialiased tracking-tight transition-colors duration-200 hover:bg-slate-50" href="#">Relays</a>
+<a class="text-slate-500 font-inter text-sm antialiased tracking-tight transition-colors duration-200 hover:bg-slate-50" href="#">Active Management</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-slate-400 text-sm" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-slate-50 border border-slate-200 rounded text-sm focus:outline-none focus:ring-1 focus:ring-primary-container w-64" placeholder="Search infrastructure..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-500 hover:bg-slate-50 transition-colors"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<button class="p-2 text-slate-500 hover:bg-slate-50 transition-colors"><span class="material-symbols-outlined" data-icon="help">help</span></button>
+<img alt="User Profile" class="w-8 h-8 rounded-full ml-2 border border-slate-200" data-alt="A clean, professional headshot of a senior technical executive with a confident expression. The lighting is soft and even, typical of a high-end corporate office setting. The background is a minimalist, out-of-focus tech environment with cool blue and slate gray tones. The overall aesthetic is polished, trustworthy, and aligned with a premium enterprise software interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2PAolWUUwum0GfsK9WiAjpPz3xeu31pK1z_8Zd18jK7Z5XhKS6f7Wwi5FDLy-VVdFO4WViRVnIJK2RFuu6b3PELcluesN_RYxTNz4wjnTCsL0mKrB5p91Upg5Z7v20IJZoJb_ks5reg8QalOnYl-pdhk1fvpTm7GFUvsD6vI1pr8asUsYkQvby_mh6iMuOpCB4Emn8-Svs1cTgANPo1f1XFU9mof6x3dyerWITA7Ja_XjysZ-oONV8gtq3HgJXGK5HZcbNZRA-SHy"/>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-margin max-w-7xl mx-auto space-y-xl">
+<!-- Header Section -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-gutter">
+<div>
+<h1 class="font-h1 text-h1 text-on-background mb-base">Dashboard</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl">Real-time status of critical data relay nodes across the global mesh network.</p>
+</div>
+<div class="flex gap-gutter">
+<div class="bg-white border border-slate-200 p-lg min-w-[160px]">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-base">Active Relays</p>
+<div class="flex items-end gap-sm">
+<span class="font-h2 text-h2 text-slate-900">07</span>
+<span class="text-emerald-600 mb-1 flex items-center font-bold text-xs">
+<span class="material-symbols-outlined text-xs mr-1" data-icon="arrow_upward">arrow_upward</span>
+                                100%
+                            </span>
+</div>
+</div>
+<div class="bg-white border border-slate-200 p-lg min-w-[160px]">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-base">Down Relays</p>
+<div class="flex items-end gap-sm">
+<span class="font-h2 text-h2 text-error">02</span>
+<span class="text-error mb-1 flex items-center font-bold text-xs">
+<span class="material-symbols-outlined text-xs mr-1" data-icon="warning">warning</span>
+                                CRITICAL
+                            </span>
+</div>
+</div>
+</div>
+</section>
+<!-- Relay Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Relay Card 1 -->
+<div class="bg-white border border-slate-200 p-lg hover:border-slate-400 hover:shadow-sm transition-all duration-300 group">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-3 bg-slate-50 group-hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined text-slate-900" data-icon="hub">hub</span>
+</div>
+<div class="flex items-center gap-2 bg-emerald-50 px-2 py-1 rounded-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+<span class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Active</span>
+</div>
+</div>
+<h3 class="font-h3 text-h3 text-slate-900 mb-xs">Relay North-Alpha</h3>
+<p class="font-mono text-mono text-slate-500 mb-lg">ID: RN-A-001-9X</p>
+<div class="pt-md border-t border-slate-100 flex justify-between items-center">
+<span class="text-xs text-slate-400">Latency: 12ms</span>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-slate-900 transition-colors cursor-pointer" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+<!-- Relay Card 2 -->
+<div class="bg-white border border-slate-200 p-lg hover:border-slate-400 hover:shadow-sm transition-all duration-300 group">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-3 bg-slate-50 group-hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined text-slate-900" data-icon="hub">hub</span>
+</div>
+<div class="flex items-center gap-2 bg-emerald-50 px-2 py-1 rounded-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+<span class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Active</span>
+</div>
+</div>
+<h3 class="font-h3 text-h3 text-slate-900 mb-xs">Relay North-Beta</h3>
+<p class="font-mono text-mono text-slate-500 mb-lg">ID: RN-B-002-4F</p>
+<div class="pt-md border-t border-slate-100 flex justify-between items-center">
+<span class="text-xs text-slate-400">Latency: 18ms</span>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-slate-900 transition-colors cursor-pointer" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+<!-- Relay Card 3 (Down) -->
+<div class="bg-white border border-error/20 p-lg hover:border-error/40 hover:shadow-sm transition-all duration-300 group relative">
+<div class="absolute inset-0 bg-error/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-3 bg-error-container/20 group-hover:bg-error-container/30 transition-colors">
+<span class="material-symbols-outlined text-error" data-icon="emergency_home">emergency_home</span>
+</div>
+<div class="flex items-center gap-2 bg-error-container px-2 py-1 rounded-sm">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="text-[10px] font-bold text-on-error-container uppercase tracking-wider">Down</span>
+</div>
+</div>
+<h3 class="font-h3 text-h3 text-slate-900 mb-xs">Relay South-Gamma</h3>
+<p class="font-mono text-mono text-slate-500 mb-lg">ID: RS-G-099-1Z</p>
+<div class="pt-md border-t border-error/10 flex justify-between items-center">
+<span class="text-xs text-error font-medium">Connection Lost: 4m ago</span>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-slate-900 transition-colors cursor-pointer" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+</div>
+<!-- Relay Card 4 -->
+<div class="bg-white border border-slate-200 p-lg hover:border-slate-400 hover:shadow-sm transition-all duration-300 group">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-3 bg-slate-50 group-hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined text-slate-900" data-icon="router">router</span>
+</div>
+<div class="flex items-center gap-2 bg-emerald-50 px-2 py-1 rounded-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+<span class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Active</span>
+</div>
+</div>
+<h3 class="font-h3 text-h3 text-slate-900 mb-xs">Relay East-Delta</h3>
+<p class="font-mono text-mono text-slate-500 mb-lg">ID: RE-D-014-7L</p>
+<div class="pt-md border-t border-slate-100 flex justify-between items-center">
+<span class="text-xs text-slate-400">Latency: 9ms</span>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-slate-900 transition-colors cursor-pointer" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+<!-- Relay Card 5 -->
+<div class="bg-white border border-slate-200 p-lg hover:border-slate-400 hover:shadow-sm transition-all duration-300 group">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-3 bg-slate-50 group-hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined text-slate-900" data-icon="hub">hub</span>
+</div>
+<div class="flex items-center gap-2 bg-emerald-50 px-2 py-1 rounded-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+<span class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Active</span>
+</div>
+</div>
+<h3 class="font-h3 text-h3 text-slate-900 mb-xs">Relay West-Epsilon</h3>
+<p class="font-mono text-mono text-slate-500 mb-lg">ID: RW-E-055-3M</p>
+<div class="pt-md border-t border-slate-100 flex justify-between items-center">
+<span class="text-xs text-slate-400">Latency: 22ms</span>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-slate-900 transition-colors cursor-pointer" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+<!-- Relay Card 6 -->
+<div class="bg-white border border-slate-200 p-lg hover:border-slate-400 hover:shadow-sm transition-all duration-300 group">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-3 bg-slate-50 group-hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined text-slate-900" data-icon="hub">hub</span>
+</div>
+<div class="flex items-center gap-2 bg-emerald-50 px-2 py-1 rounded-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+<span class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Active</span>
+</div>
+</div>
+<h3 class="font-h3 text-h3 text-slate-900 mb-xs">Relay Central-Zeta</h3>
+<p class="font-mono text-mono text-slate-500 mb-lg">ID: RC-Z-102-8R</p>
+<div class="pt-md border-t border-slate-100 flex justify-between items-center">
+<span class="text-xs text-slate-400">Latency: 5ms</span>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-slate-900 transition-colors cursor-pointer" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+<!-- Relay Card 7 -->
+<div class="bg-white border border-slate-200 p-lg hover:border-slate-400 hover:shadow-sm transition-all duration-300 group">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-3 bg-slate-50 group-hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined text-slate-900" data-icon="router">router</span>
+</div>
+<div class="flex items-center gap-2 bg-emerald-50 px-2 py-1 rounded-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+<span class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Active</span>
+</div>
+</div>
+<h3 class="font-h3 text-h3 text-slate-900 mb-xs">Relay Central-Eta</h3>
+<p class="font-mono text-mono text-slate-500 mb-lg">ID: RC-H-103-2P</p>
+<div class="pt-md border-t border-slate-100 flex justify-between items-center">
+<span class="text-xs text-slate-400">Latency: 7ms</span>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-slate-900 transition-colors cursor-pointer" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+<!-- Relay Card 8 (Down) -->
+<div class="bg-white border border-error/20 p-lg hover:border-error/40 hover:shadow-sm transition-all duration-300 group relative">
+<div class="absolute inset-0 bg-error/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-3 bg-error-container/20 group-hover:bg-error-container/30 transition-colors">
+<span class="material-symbols-outlined text-error" data-icon="emergency_home">emergency_home</span>
+</div>
+<div class="flex items-center gap-2 bg-error-container px-2 py-1 rounded-sm">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="text-[10px] font-bold text-on-error-container uppercase tracking-wider">Down</span>
+</div>
+</div>
+<h3 class="font-h3 text-h3 text-slate-900 mb-xs">Relay North-Theta</h3>
+<p class="font-mono text-mono text-slate-500 mb-lg">ID: RN-T-204-5K</p>
+<div class="pt-md border-t border-error/10 flex justify-between items-center">
+<span class="text-xs text-error font-medium">Authentication Error</span>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-slate-900 transition-colors cursor-pointer" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+</div>
+<!-- Relay Card 9 -->
+<div class="bg-white border border-slate-200 p-lg hover:border-slate-400 hover:shadow-sm transition-all duration-300 group">
+<div class="flex justify-between items-start mb-lg">
+<div class="p-3 bg-slate-50 group-hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined text-slate-900" data-icon="hub">hub</span>
+</div>
+<div class="flex items-center gap-2 bg-emerald-50 px-2 py-1 rounded-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+<span class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Active</span>
+</div>
+</div>
+<h3 class="font-h3 text-h3 text-slate-900 mb-xs">Relay East-Iota</h3>
+<p class="font-mono text-mono text-slate-500 mb-lg">ID: RE-I-015-1V</p>
+<div class="pt-md border-t border-slate-100 flex justify-between items-center">
+<span class="text-xs text-slate-400">Latency: 14ms</span>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-slate-900 transition-colors cursor-pointer" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+</section>
+<!-- Bottom Section: Infrastructure Overview (Bento Style) -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<div class="lg:col-span-8 bg-white border border-slate-200 p-lg flex flex-col justify-between">
+<div>
+<h4 class="font-h3 text-h3 text-slate-900 mb-base">Throughput Metrics</h4>
+<p class="font-body-md text-body-md text-slate-500 mb-lg">Global data relay volume over the last 24 hours.</p>
+</div>
+<div class="h-48 w-full bg-slate-50 relative overflow-hidden border border-slate-100 rounded-sm">
+<div class="absolute inset-0 flex items-end px-4 pb-2 gap-2">
+<!-- Simulating a minimalist bar chart with divs -->
+<div class="flex-1 bg-slate-200 h-1/2"></div>
+<div class="flex-1 bg-slate-300 h-2/3"></div>
+<div class="flex-1 bg-slate-900 h-4/5"></div>
+<div class="flex-1 bg-slate-300 h-1/2"></div>
+<div class="flex-1 bg-slate-200 h-1/3"></div>
+<div class="flex-1 bg-slate-400 h-2/3"></div>
+<div class="flex-1 bg-slate-900 h-5/6"></div>
+<div class="flex-1 bg-slate-400 h-1/2"></div>
+<div class="flex-1 bg-slate-200 h-2/3"></div>
+<div class="flex-1 bg-slate-300 h-3/4"></div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 bg-slate-900 p-lg text-white flex flex-col justify-between overflow-hidden relative">
+<div class="absolute top-0 right-0 p-lg opacity-10">
+<span class="material-symbols-outlined text-[120px]" data-icon="shield_with_heart">shield_with_heart</span>
+</div>
+<div class="relative z-10">
+<h4 class="font-h3 text-h3 mb-base">Security Protocol</h4>
+<p class="text-slate-400 text-sm mb-lg">All active relays are currently operating under Enhanced AES-256 encryption standards.</p>
+</div>
+<div class="relative z-10">
+<div class="text-emerald-400 font-bold text-sm flex items-center gap-2 mb-sm">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+                            Compliant
+                        </div>
+<button class="text-white text-xs border border-white/20 px-4 py-2 hover:bg-white hover:text-slate-900 transition-colors uppercase tracking-widest font-bold">Audit Reports</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer / Technical Specs -->
+<footer class="p-margin border-t border-slate-200 mt-xl">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-gutter">
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="font-mono text-[10px] text-slate-500 uppercase tracking-widest">Network Stability: 99.98%</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span>
+<span class="font-mono text-[10px] text-slate-500 uppercase tracking-widest">System Load: 14%</span>
+</div>
+</div>
+<div class="font-mono text-[10px] text-slate-400 uppercase tracking-widest">
+                    © 2024 RelayOS • Executive Control Interface v4.2.1
+                </div>
+</div>
+</footer>
+</main>
+</body></html>

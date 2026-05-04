@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f6f3f5",
+                        "inverse-primary": "#bec6e0",
+                        "on-tertiary-fixed": "#271901",
+                        "primary-container": "#131b2e",
+                        "tertiary-fixed-dim": "#dec29a",
+                        "secondary-fixed": "#d5e3fd",
+                        "on-tertiary-fixed-variant": "#574425",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "surface-container-highest": "#e4e2e4",
+                        "on-tertiary-container": "#98805d",
+                        "surface": "#fcf8fa",
+                        "on-background": "#1b1b1d",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#000000",
+                        "outline-variant": "#c6c6cd",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e4e2e4",
+                        "primary-fixed": "#dae2fd",
+                        "surface-bright": "#fcf8fa",
+                        "on-error-container": "#93000a",
+                        "outline": "#76777d",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#565e74",
+                        "on-secondary-container": "#57657b",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "tertiary-fixed": "#fcdeb5",
+                        "tertiary-container": "#271901",
+                        "secondary-container": "#d5e3fd",
+                        "surface-container-high": "#eae7e9",
+                        "error": "#ba1a1a",
+                        "secondary": "#515f74",
+                        "inverse-on-surface": "#f3f0f2",
+                        "on-primary-container": "#7c839b",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "tertiary": "#000000",
+                        "primary-fixed-dim": "#bec6e0",
+                        "on-surface": "#1b1b1d",
+                        "on-primary-fixed": "#131b2e",
+                        "surface-dim": "#dcd9db",
+                        "on-surface-variant": "#45464d",
+                        "surface-container": "#f0edef",
+                        "inverse-surface": "#303032",
+                        "background": "#fcf8fa",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "margin": "32px",
+                        "xs": "4px",
+                        "xl": "48px",
+                        "gutter": "24px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "h3": ["Inter"],
+                        "h1": ["Inter"],
+                        "mono": ["monospace"],
+                        "body-md": ["Inter"],
+                        "h2": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "inter": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "h3": ["20px", {"lineHeight": "1.4", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "mono": ["13px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-md": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fcf8fa;
+        }
+    </style>
+</head>
+<body class="font-inter antialiased text-on-background">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-slate-200 flex justify-between items-center px-6 py-3 h-16">
+<div class="flex items-center gap-8">
+<span class="font-bold text-lg tracking-tighter text-slate-900">RelayOS</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-slate-500 hover:bg-slate-50 transition-colors duration-200 font-inter antialiased tracking-tight text-sm px-2 py-1 rounded" href="#">Relays</a>
+<a class="text-slate-900 font-semibold font-inter antialiased tracking-tight text-sm px-2 py-1 rounded" href="#">Active Management</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative flex items-center bg-slate-50 rounded px-3 py-1.5 border border-slate-200">
+<span class="material-symbols-outlined text-slate-400 text-lg mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 text-slate-900 placeholder:text-slate-400" placeholder="Search infrastructure..." type="text"/>
+</div>
+<button class="p-2 text-slate-500 hover:bg-slate-50 transition-colors rounded">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-50 transition-colors rounded">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<img alt="User Profile" class="w-8 h-8 rounded-full border border-slate-200 object-cover" data-alt="A professional headshot of a senior tech executive with a clean, minimalist background. The lighting is soft and corporate, emphasizing a reliable and expert personality. The image follows a high-fidelity light-mode aesthetic with neutral tones and a focus on clarity and professional grooming." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_khVC_sWW2CGJXp5kHmEnlLgVCyQ_Lq_a8D1D9pfb3eGVF-kmHs9qzEMJWKdEfEyNAtOCcA5p3ZrUXDdayw2ExukAYoaMdVJ1GuAd69V_0-bTh6ySTBC-C6W5ymEat6mKvq60LbPwCibWOA8zPrUkzRH1P9TbhoEntVtlUwAy_ag465MuOy-EwoSsLqnSaz_5vRv4FPk1VB1eze2rqH2x2VYL6kxKorkuOsBwtGIb61Hnpx6zdkecGiYOi5Shitw9W8uus9SXJ6qu"/>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-screen w-64 bg-slate-50 border-r border-slate-200 pt-16 flex flex-col py-8 px-4 gap-2 z-40">
+<div class="mb-8 px-2">
+<h2 class="font-black text-xl text-slate-900 tracking-tight">Executive Control</h2>
+<p class="text-xs text-slate-500 font-medium uppercase tracking-widest mt-1">Data Relay Mgmt</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:bg-slate-200/50 transition-all font-inter text-sm font-medium rounded group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-slate-900" data-icon="settings_input_component">settings_input_component</span>
+                Relay Clusters
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:bg-slate-200/50 transition-all font-inter text-sm font-medium rounded group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-slate-900" data-icon="query_stats">query_stats</span>
+                Analytics
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:bg-slate-200/50 transition-all font-inter text-sm font-medium rounded group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-slate-900" data-icon="history_edu">history_edu</span>
+                Audit Logs
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-900 font-bold border-r-2 border-slate-900 bg-white transition-all font-inter text-sm rounded shadow-sm" href="#">
+<span class="material-symbols-outlined text-slate-900" data-icon="tune" style="font-variation-settings: 'FILL' 1;">tune</span>
+                Configuration
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 hover:bg-slate-200/50 transition-all font-inter text-sm font-medium rounded group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-slate-900" data-icon="settings">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto px-2 pb-4">
+<button class="w-full py-2.5 bg-primary text-white font-inter text-sm font-semibold rounded-lg shadow-sm hover:opacity-90 active:scale-95 transition-all">
+                Add New Relay
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="pl-64 pt-16 min-h-screen">
+<div class="max-w-6xl mx-auto px-12 py-12">
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-2 text-slate-400 font-label-sm text-label-sm mb-4">
+<span>Infrastructure</span>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<span>Relays</span>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<span class="text-slate-900 font-medium">Add New Relay</span>
+</div>
+<!-- Page Header -->
+<div class="mb-xl">
+<h1 class="font-h1 text-h1 text-slate-900 mb-2">Deploy New Data Relay</h1>
+<p class="text-body-lg font-body-lg text-slate-500 max-w-2xl">Initialize a high-performance relay node within your cluster infrastructure. All deployments are subject to audit logs and compliance checks.</p>
+</div>
+<div class="grid grid-cols-12 gap-gutter items-start">
+<!-- Form Column -->
+<div class="col-span-12 lg:col-span-8">
+<div class="bg-white border border-slate-200 p-lg rounded shadow-[0_4px_20px_-12px_rgba(0,0,0,0.05)]">
+<form class="space-y-lg">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<!-- Relay Name -->
+<div class="space-y-2">
+<label class="block font-inter text-sm font-semibold text-slate-900">Relay Name</label>
+<input class="w-full border-slate-200 focus:border-primary focus:ring-primary-container rounded p-3 text-sm transition-all placeholder:text-slate-300" placeholder="e.g. US-EAST-01-RELAY" type="text"/>
+</div>
+<!-- Endpoint URL -->
+<div class="space-y-2">
+<label class="block font-inter text-sm font-semibold text-slate-900">Endpoint URL</label>
+<input class="w-full border-slate-200 focus:border-primary focus:ring-primary-container rounded p-3 text-sm transition-all placeholder:text-slate-300" placeholder="https://api.relay.corp/v1" type="url"/>
+</div>
+<!-- Protocol -->
+<div class="space-y-2">
+<label class="block font-inter text-sm font-semibold text-slate-900">Protocol</label>
+<select class="w-full border-slate-200 focus:border-primary focus:ring-primary-container rounded p-3 text-sm transition-all text-slate-700">
+<option>TCP</option>
+<option>UDP</option>
+<option>HTTP</option>
+</select>
+</div>
+<!-- Node Tier -->
+<div class="space-y-2">
+<label class="block font-inter text-sm font-semibold text-slate-900">Node Tier</label>
+<select class="w-full border-slate-200 focus:border-primary focus:ring-primary-container rounded p-3 text-sm transition-all text-slate-700">
+<option>Primary</option>
+<option>Secondary</option>
+<option>Edge</option>
+</select>
+</div>
+</div>
+<!-- Description -->
+<div class="space-y-2">
+<label class="block font-inter text-sm font-semibold text-slate-900">Description</label>
+<textarea class="w-full border-slate-200 focus:border-primary focus:ring-primary-container rounded p-3 text-sm transition-all placeholder:text-slate-300" placeholder="Describe the purpose and expected load for this relay..." rows="4"></textarea>
+</div>
+<!-- Form Actions -->
+<div class="flex items-center justify-end gap-md pt-lg border-t border-slate-50">
+<button class="px-6 py-2.5 border border-slate-200 text-slate-600 font-inter text-sm font-semibold rounded hover:bg-slate-50 transition-colors" type="button">
+                                    Cancel
+                                </button>
+<button class="px-8 py-2.5 bg-primary text-white font-inter text-sm font-bold rounded shadow-sm hover:opacity-90 active:scale-[0.98] transition-all" type="submit">
+                                    Deploy Relay
+                                </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Info/Compliance Column -->
+<div class="col-span-12 lg:col-span-4 space-y-lg">
+<!-- Compliance Card -->
+<div class="bg-slate-50 border border-slate-200 p-lg rounded">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-slate-900 text-xl" data-icon="verified_user">verified_user</span>
+<h3 class="font-h3 text-h3 text-slate-900">Compliance Info</h3>
+</div>
+<ul class="space-y-3">
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-slate-400 text-sm mt-0.5" data-icon="check_circle">check_circle</span>
+<p class="text-sm text-slate-600 leading-relaxed">Automatic SSL termination using corporate certificate authority.</p>
+</li>
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-slate-400 text-sm mt-0.5" data-icon="check_circle">check_circle</span>
+<p class="text-sm text-slate-600 leading-relaxed">FIPS 140-2 Level 3 data encryption at rest and in transit.</p>
+</li>
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-slate-400 text-sm mt-0.5" data-icon="check_circle">check_circle</span>
+<p class="text-sm text-slate-600 leading-relaxed">Regional sovereignty checks will be performed prior to routing.</p>
+</li>
+</ul>
+<div class="mt-6 pt-4 border-t border-slate-200">
+<a class="text-slate-900 text-xs font-bold uppercase tracking-widest hover:underline inline-flex items-center gap-1" href="#">
+                                Read full docs
+                                <span class="material-symbols-outlined text-xs" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Visual Accent Card -->
+<div class="relative h-48 rounded overflow-hidden group">
+<img alt="Server Rack" class="w-full h-full object-cover grayscale brightness-75 transition-all duration-500 group-hover:scale-110" data-alt="A macro shot of a sleek, modern server rack with cool blue and slate-grey lighting. The image emphasizes high-technology and precision, with fiber optic cables organized perfectly. The mood is calm, professional, and intellectually focused, reflecting the architectural data management brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBdlwp62fhU2DxHCiCl2PLtCoc0xtWdUMPJG6YwCKDJVnILOAVzz6u5AU8MfKzG0xEsB1ysIB6OQEUEDYssiVGXI-hTFCNiL27zmAz_E1JpTorUxTns0eqgFAELk6GPsNQWG0e5kDQqtyjCIGxyhIx2OV6Rd9TXsVKKQnj3wU5-fl1nY2qWWa6CGMpt9Ym4glhCxKCQnsmKB6NYEQwTK4v6FD5TZZRsACmOHMZUC0xH2WL7dcf1rc0zk1T6hHmqZYtgG_w3OSRYOuj"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex flex-col justify-end p-6">
+<p class="text-white font-inter text-xs font-bold uppercase tracking-widest opacity-80 mb-1">Status</p>
+<h4 class="text-white font-inter text-lg font-bold">Network Healthy</h4>
+<div class="flex items-center gap-2 mt-2">
+<div class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"></div>
+<span class="text-white text-xs opacity-90">All systems operational</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB (Suppressed on this transactional screen as per instructions) -->
+</body></html>

@@ -1,0 +1,105 @@
+<div class="p-7 max-w-[1100px]">
+
+  <!-- ── Header ── -->
+  <div class="flex items-start justify-between mb-7">
+    <div>
+      <h1 class="text-[22px] font-bold text-gray-900">Dashboard</h1>
+      <p class="text-[13px] text-gray-500 mt-1">Real-time status of critical data relay nodes across the global mesh network.</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <div class="border border-gray-200 bg-white px-5 py-3 min-w-[130px]">
+        <div class="text-[10px] text-gray-400 uppercase tracking-widest font-medium mb-1">Active Relays</div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-[26px] font-black text-gray-900 leading-none">{{ activeCount.toString().padStart(2,'0') }}</span>
+          <span class="text-[11px] text-green-600 font-bold">+100%</span>
+        </div>
+      </div>
+      <div class="border border-red-200 bg-white px-5 py-3 min-w-[130px]">
+        <div class="text-[10px] text-gray-400 uppercase tracking-widest font-medium mb-1">Down Relays</div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-[26px] font-black text-gray-900 leading-none">{{ downCount.toString().padStart(2,'0') }}</span>
+          <span class="text-[11px] text-red-600 font-bold flex items-center gap-1">⚠ CRITICAL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Relay Grid ── -->
+  <div class="grid grid-cols-3 gap-4 mb-6">
+    @for (relay of relays; track relay.id) {
+      <div class="bg-white border border-gray-200 p-5 hover:shadow-md hover:-translate-y-px transition-all duration-150 cursor-default">
+        <div class="flex items-start justify-between mb-4">
+          <!-- Icon -->
+          <div class="w-10 h-10 bg-gray-100 flex items-center justify-center text-gray-500">
+            @if (relay.status === 'down') {
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+            } @else {
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/>
+                <line x1="12" y1="7" x2="5" y2="17"/><line x1="12" y1="7" x2="19" y2="17"/>
+              </svg>
+            }
+          </div>
+          <div class="flex items-center gap-2">
+            <span [class]="getStatusBadge(relay)">{{ getStatusLabel(relay) }}</span>
+            <button class="text-gray-300 hover:text-gray-600 text-lg font-bold leading-none">⋯</button>
+          </div>
+        </div>
+        <div class="text-[15px] font-semibold text-gray-900">{{ relay.name }}</div>
+        <div class="text-[11px] text-gray-400 mt-0.5 mb-3 font-mono">ID: {{ relay.id }}</div>
+        <div [ngClass]="relay.status === 'down' ? 'text-red-500' : 'text-gray-400'" class="text-[12px] font-medium">
+          @if (relay.status === 'down') { {{ relay.error }} }
+          @else { Latency: {{ relay.latency }}ms }
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- ── Bottom Row: Chart + Security ── -->
+  <div class="grid grid-cols-3 gap-4">
+    <div class="col-span-2 bg-white border border-gray-200 p-5">
+      <div class="text-[14px] font-semibold text-gray-900">Throughput Metrics</div>
+      <div class="text-[12px] text-gray-400 mt-0.5 mb-4">Global data relay volume over the last 24 hours.</div>
+      <div style="height: 180px;">
+        <canvas baseChart [data]="barData" [options]="barOptions" type="bar"></canvas>
+      </div>
+    </div>
+
+    <div class="bg-gray-900 text-white p-6 flex flex-col justify-between">
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6ee7b7" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span class="text-[15px] font-semibold">Security Protocol</span>
+        </div>
+        <p class="text-[12px] text-gray-400 leading-relaxed">
+          All active relays are currently operating under Enhanced AES-256 encryption standards.
+        </p>
+      </div>
+      <div class="mt-5">
+        <div class="flex items-center gap-2 mb-4">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6ee7b7" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          <span class="text-[13px] text-green-400 font-semibold">Compliant</span>
+        </div>
+        <a routerLink="/audit-logs" class="inline-block border border-gray-600 text-[11px] font-bold text-gray-300 tracking-widest uppercase py-2 px-4 hover:bg-gray-800 transition-colors">
+          AUDIT REPORTS
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="flex items-center justify-between mt-8 pt-4 border-t border-gray-200">
+    <div class="flex items-center gap-4 text-[11px] text-gray-400">
+      <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"></span> NETWORK STABILITY: 99.38%</span>
+      <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-400 inline-block"></span> SYSTEM LOAD: 18%</span>
+    </div>
+    <span class="text-[11px] text-gray-400">© 2024 RelayOS · Executive Control Interface v4.3.1</span>
+  </div>
+</div>
