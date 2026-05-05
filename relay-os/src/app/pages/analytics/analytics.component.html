@@ -3,7 +3,7 @@
   <!-- Header -->
   <div class="flex items-start justify-between mb-6">
     <div>
-      <h1 class="text-[22px] font-bold text-gray-900">Visualizations</h1>
+      <h1 class="text-[22px] font-bold text-gray-900 dark:text-white">Visualizations</h1>
       <p class="text-[13px] text-gray-500 mt-1">Real-time telemetry and architectural data flows across the global relay network. Metrics are updated every 400ms.</p>
     </div>
     <div class="flex items-center gap-3">
@@ -19,7 +19,7 @@
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
         </svg>
-        Export PDF
+        Export 
       </button>
     </div>
   </div>
@@ -27,10 +27,10 @@
   <!-- KPI Cards -->
   <div class="grid grid-cols-4 gap-4 mb-6">
     @for (kpi of kpis; track kpi.label) {
-      <div class="stat-card">
+      <div class="stat-card dark:border-gray-700 dark:bg-gray-800">
         <div class="text-[11px] text-gray-400 uppercase tracking-wider font-medium mb-1">{{ kpi.label }}</div>
         <div class="flex items-end justify-between mb-2">
-          <span class="text-[28px] font-black text-gray-900 leading-none">{{ kpi.value }}</span>
+          <span class="text-[28px] font-black text-gray-900 dark:text-white leading-none">{{ kpi.value }}</span>
           <span class="text-[11px] font-bold pb-1" [class]="kpi.deltaColor">{{ kpi.delta }}</span>
         </div>
         <span class="text-[13px] text-gray-500 font-medium">{{ kpi.unit }}</span>

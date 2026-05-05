@@ -1,9 +1,9 @@
-<div class="p-7 max-w-[1100px]">
+<div class="p-7 max-w">
 
   <!-- ── Header ── -->
   <div class="flex items-start justify-between mb-7">
     <div>
-      <h1 class="text-[22px] font-bold text-gray-900">Dashboard</h1>
+      <h1 class="text-[22px] font-bold text-gray-900 dark:text-white">Dashboard</h1>
       <p class="text-[13px] text-gray-500 mt-1">Real-time status of critical data relay nodes across the global mesh network.</p>
     </div>
     <div class="flex items-center gap-3">
@@ -58,41 +58,7 @@
     }
   </div>
 
-  <!-- ── Bottom Row: Chart + Security ── -->
-  <div class="grid grid-cols-3 gap-4">
-    <div class="col-span-2 bg-white border border-gray-200 p-5">
-      <div class="text-[14px] font-semibold text-gray-900">Throughput Metrics</div>
-      <div class="text-[12px] text-gray-400 mt-0.5 mb-4">Global data relay volume over the last 24 hours.</div>
-      <div style="height: 180px;">
-        <canvas baseChart [data]="barData" [options]="barOptions" type="bar"></canvas>
-      </div>
-    </div>
 
-    <div class="bg-gray-900 text-white p-6 flex flex-col justify-between">
-      <div>
-        <div class="flex items-center gap-2 mb-3">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6ee7b7" stroke-width="2">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          </svg>
-          <span class="text-[15px] font-semibold">Security Protocol</span>
-        </div>
-        <p class="text-[12px] text-gray-400 leading-relaxed">
-          All active relays are currently operating under Enhanced AES-256 encryption standards.
-        </p>
-      </div>
-      <div class="mt-5">
-        <div class="flex items-center gap-2 mb-4">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6ee7b7" stroke-width="2.5">
-            <polyline points="20 6 9 17 4 12"/>
-          </svg>
-          <span class="text-[13px] text-green-400 font-semibold">Compliant</span>
-        </div>
-        <a routerLink="/audit-logs" class="inline-block border border-gray-600 text-[11px] font-bold text-gray-300 tracking-widest uppercase py-2 px-4 hover:bg-gray-800 transition-colors">
-          AUDIT REPORTS
-        </a>
-      </div>
-    </div>
-  </div>
 
   <!-- Footer -->
   <div class="flex items-center justify-between mt-8 pt-4 border-t border-gray-200">
