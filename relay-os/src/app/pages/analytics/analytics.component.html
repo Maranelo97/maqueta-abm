@@ -1,20 +1,20 @@
 <div class="p-7 max-w-[1100px]">
 
   <!-- Header -->
-  <div class="flex items-start justify-between mb-6">
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0 mb-6">
     <div>
       <h1 class="text-[22px] font-bold text-gray-900 dark:text-white">Visualizations</h1>
       <p class="text-[13px] text-gray-500 mt-1">Real-time telemetry and architectural data flows across the global relay network. Metrics are updated every 400ms.</p>
     </div>
-    <div class="flex items-center gap-3">
-      <button class="flex items-center gap-2 border border-gray-200 bg-white text-[13px] text-gray-600 font-medium px-4 py-2 hover:bg-gray-50 transition-colors">
+    <div class="flex items-center gap-3 w-full sm:w-auto">
+      <button class="flex-1 sm:flex-none justify-center flex items-center gap-2 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-[13px] text-gray-600 dark:text-gray-300 font-medium px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/>
           <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
         </svg>
         Last 24 Hours
       </button>
-      <button class="flex items-center gap-2 bg-black text-white text-[13px] font-semibold px-4 py-2 hover:bg-gray-800 transition-colors">
+      <button class="flex-1 sm:flex-none justify-center flex items-center gap-2 bg-black dark:bg-white text-white dark:text-black text-[13px] font-semibold px-4 py-2 hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
           <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
@@ -25,7 +25,7 @@
   </div>
 
   <!-- KPI Cards -->
-  <div class="grid grid-cols-4 gap-4 mb-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
     @for (kpi of kpis; track kpi.label) {
       <div class="stat-card dark:border-gray-700 dark:bg-gray-800">
         <div class="text-[11px] text-gray-400 uppercase tracking-wider font-medium mb-1">{{ kpi.label }}</div>
@@ -42,10 +42,10 @@
   </div>
 
   <!-- Charts Row -->
-  <div class="grid grid-cols-3 gap-4 mb-6">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
     <!-- Regional Throughput (large) -->
-    <div class="col-span-2 bg-white border border-gray-200 p-5">
-      <div class="text-[14px] font-semibold text-gray-900">Regional Throughput Clusters</div>
+    <div class="col-span-1 lg:col-span-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-5">
+      <div class="text-[14px] font-semibold text-gray-900 dark:text-white">Regional Throughput Clusters</div>
       <div class="text-[12px] text-gray-400 mt-0.5 mb-4">Data distribution across primary global relay zones</div>
       <div style="height: 280px;">
         <canvas baseChart [data]="regionalData" [options]="regionalOptions" type="bar"></canvas>
@@ -53,10 +53,10 @@
     </div>
 
     <!-- Network Topology -->
-    <div class="bg-white border border-gray-200 p-5 flex flex-col">
+    <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-5 flex flex-col">
       <div class="flex items-center justify-between mb-2">
         <div>
-          <div class="text-[14px] font-semibold text-gray-900">Network Topology</div>
+          <div class="text-[14px] font-semibold text-gray-900 dark:text-white">Network Topology</div>
           <div class="text-[12px] text-gray-400">Active node saturation map</div>
         </div>
         <div class="flex items-center gap-1.5 text-[11px] text-green-600 font-bold">
@@ -104,14 +104,14 @@
   </div>
 
   <!-- Relay Activity Log -->
-  <div class="bg-white border border-gray-200">
-    <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100">
-      <div class="text-[14px] font-semibold text-gray-900">Relay Activity Log</div>
-      <a routerLink="/audit-logs" class="text-[13px] text-gray-500 hover:text-gray-900 transition-colors">View All Logs</a>
+  <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+    <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100 dark:border-gray-700">
+      <div class="text-[14px] font-semibold text-gray-900 dark:text-white">Relay Activity Log</div>
+      <a routerLink="/audit-logs" class="text-[13px] text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">View All Logs</a>
     </div>
     @for (log of logs; track log.title) {
-      <div class="flex items-center gap-4 px-5 py-4 border-b border-gray-50 hover:bg-gray-50 transition-colors">
-        <div class="w-8 h-8 bg-gray-100 flex items-center justify-center shrink-0">
+      <div class="flex items-center gap-4 px-5 py-4 border-b border-gray-50 dark:border-gray-700/50 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+        <div class="w-8 h-8 bg-gray-100 dark:bg-gray-700 flex items-center justify-center shrink-0 rounded-sm">
           @if (log.icon === 'sync') {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2">
               <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/>
@@ -130,9 +130,9 @@
             </svg>
           }
         </div>
-        <div class="flex-1">
-          <div class="text-[13px] font-semibold text-gray-900">{{ log.title }}</div>
-          <div class="text-[12px] text-gray-400 mt-0.5">{{ log.subtitle }}</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-[13px] font-semibold text-gray-900 dark:text-white truncate">{{ log.title }}</div>
+          <div class="text-[12px] text-gray-400 mt-0.5 truncate">{{ log.subtitle }}</div>
         </div>
         <div class="text-right shrink-0">
           <div class="text-[11px] text-gray-400 mb-1">{{ log.time }}</div>

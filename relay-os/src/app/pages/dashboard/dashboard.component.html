@@ -1,36 +1,36 @@
-<div class="p-7 max-w">
+<div class="p-7 max-w page-entry">
 
   <!-- ── Header ── -->
-  <div class="flex items-start justify-between mb-7">
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0 mb-7">
     <div>
       <h1 class="text-[22px] font-bold text-gray-900 dark:text-white">Dashboard</h1>
       <p class="text-[13px] text-gray-500 mt-1">Real-time status of critical data relay nodes across the global mesh network.</p>
     </div>
-    <div class="flex items-center gap-3">
-      <div class="border border-gray-200 bg-white px-5 py-3 min-w-[130px]">
+    <div class="flex items-center gap-3 w-full sm:w-auto">
+      <div class="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-5 py-3 flex-1 sm:min-w-[130px]">
         <div class="text-[10px] text-gray-400 uppercase tracking-widest font-medium mb-1">Active Relays</div>
         <div class="flex items-baseline gap-2">
-          <span class="text-[26px] font-black text-gray-900 leading-none">{{ activeCount.toString().padStart(2,'0') }}</span>
-          <span class="text-[11px] text-green-600 font-bold">+100%</span>
+          <span class="text-[26px] font-black text-gray-900 dark:text-white leading-none">{{ activeCount.toString().padStart(2,'0') }}</span>
+          <span class="text-[11px] text-green-600 dark:text-green-400 font-bold">+100%</span>
         </div>
       </div>
-      <div class="border border-red-200 bg-white px-5 py-3 min-w-[130px]">
+      <div class="border border-red-200 dark:border-red-900/50 bg-white dark:bg-gray-800 px-5 py-3 flex-1 sm:min-w-[130px]">
         <div class="text-[10px] text-gray-400 uppercase tracking-widest font-medium mb-1">Down Relays</div>
         <div class="flex items-baseline gap-2">
-          <span class="text-[26px] font-black text-gray-900 leading-none">{{ downCount.toString().padStart(2,'0') }}</span>
-          <span class="text-[11px] text-red-600 font-bold flex items-center gap-1">⚠ CRITICAL</span>
+          <span class="text-[26px] font-black text-gray-900 dark:text-white leading-none">{{ downCount.toString().padStart(2,'0') }}</span>
+          <span class="text-[11px] text-red-600 dark:text-red-400 font-bold flex items-center gap-1">⚠ CRITICAL</span>
         </div>
       </div>
     </div>
   </div>
 
   <!-- ── Relay Grid ── -->
-  <div class="grid grid-cols-3 gap-4 mb-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
     @for (relay of relays; track relay.id) {
-      <div class="bg-white border border-gray-200 p-5 hover:shadow-md hover:-translate-y-px transition-all duration-150 cursor-default">
+      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-5 hover:shadow-md hover:-translate-y-px transition-all duration-150 cursor-default animate-row-entry">
         <div class="flex items-start justify-between mb-4">
           <!-- Icon -->
-          <div class="w-10 h-10 bg-gray-100 flex items-center justify-center text-gray-500">
+          <div class="w-10 h-10 bg-gray-100 dark:bg-gray-700/50 flex items-center justify-center text-gray-500 dark:text-gray-400">
             @if (relay.status === 'down') {
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
                 <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
@@ -45,10 +45,10 @@
           </div>
           <div class="flex items-center gap-2">
             <span [class]="getStatusBadge(relay)">{{ getStatusLabel(relay) }}</span>
-            <button class="text-gray-300 hover:text-gray-600 text-lg font-bold leading-none">⋯</button>
+            <button class="text-gray-300 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-300 text-lg font-bold leading-none">⋯</button>
           </div>
         </div>
-        <div class="text-[15px] font-semibold text-gray-900">{{ relay.name }}</div>
+        <div class="text-[15px] font-semibold text-gray-900 dark:text-white">{{ relay.name }}</div>
         <div class="text-[11px] text-gray-400 mt-0.5 mb-3 font-mono">ID: {{ relay.id }}</div>
         <div [ngClass]="relay.status === 'down' ? 'text-red-500' : 'text-gray-400'" class="text-[12px] font-medium">
           @if (relay.status === 'down') { {{ relay.error }} }
@@ -61,8 +61,8 @@
 
 
   <!-- Footer -->
-  <div class="flex items-center justify-between mt-8 pt-4 border-t border-gray-200">
-    <div class="flex items-center gap-4 text-[11px] text-gray-400">
+  <div class="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0 mt-8 pt-4 border-t border-gray-200 dark:border-gray-800 text-center sm:text-left">
+    <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-[11px] text-gray-400">
       <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"></span> NETWORK STABILITY: 99.38%</span>
       <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-400 inline-block"></span> SYSTEM LOAD: 18%</span>
     </div>

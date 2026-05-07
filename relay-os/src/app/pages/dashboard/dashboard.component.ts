@@ -1,14 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { NgClass } from '@angular/common';
-import { BaseChartDirective } from 'ng2-charts';
 import { ChartData, ChartOptions } from 'chart.js';
 import { RelayService, RelayNode } from '../../core/services/relay.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterLink, NgClass, BaseChartDirective],
+  imports: [ NgClass],
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent {

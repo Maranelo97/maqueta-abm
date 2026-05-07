@@ -10,6 +10,7 @@ import { RelayService, RelayNode } from '../../core/services/relay.service';
   standalone: true,
   imports: [FormsModule, BaseChartDirective],
   templateUrl: './active-management.component.html',
+  styleUrl: './active-management.component.css',
 })
 export class ActiveManagementComponent {
   svc = inject(RelayService);

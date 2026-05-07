@@ -1,8 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { ThemeService } from '../services/theme.service';
 
-interface NavItem { label: string; route: string; icon: string; }
+interface NavItem {
+  label: string;
+  route: string;
+  icon?: string;
+}
 
 @Component({
   selector: 'app-shell',
@@ -12,10 +16,19 @@ interface NavItem { label: string; route: string; icon: string; }
 })
 export class ShellComponent {
   themeService = inject(ThemeService);
+  router = inject(Router);
+  isMobileMenuOpen = false;
 
   navItems: NavItem[] = [
-    { label: 'Relay Clusters',  route: '/dashboard',          icon: 'clusters'  },
-    { label: 'Analytics',       route: '/analytics',          icon: 'analytics' },
-    { label: 'Management',   route: '/active-management',  icon: 'config'    },
+    { label: 'Relays', route: '/dashboard', icon: 'clusters' },
+    { label: 'Visualizaciones', route: '/visualizations', icon: 'analytics' },
   ];
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  logout() {
+    this.router.navigate(['/login']);
+  }
 }

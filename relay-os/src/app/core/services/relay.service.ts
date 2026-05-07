@@ -1,15 +1,57 @@
 import { Injectable } from '@angular/core';
 
 export interface RelayNode {
-  id: string; name: string; protocol: 'TCP' | 'UDP';
-  endpointUrl: string; status: 'active' | 'down' | 'idle';
-  latency?: number; error?: string; tier: 'Primary' | 'Secondary' | 'Edge';
+  id: string;
+  name: string;
+  protocol: 'TCP' | 'UDP' | 'HTTPS' | 'WSS' | 'gRPC' | 'GraphQL';
+  endpointUrl: string;
+  status: 'active' | 'down' | 'idle';
+  latency?: number;
+  error?: string;
+  tier: 'Primary' | 'Secondary' | 'Edge';
 }
 
 export interface ActivityLog {
   icon: 'sync' | 'warn' | 'clock';
   title: string; subtitle: string;
   time: string; status: 'SUCCESS' | 'INVESTIGATING' | 'COMPLETED';
+}
+
+export interface Ambiente {
+  idAmbiente: number;
+  nombre?: string;
+}
+
+export interface Relay {
+  idRelay: number;
+  nombre?: string;
+}
+
+export interface Visualizacion {
+  idRelay: number;
+  idAmbiente: number;
+  idUnidad: string;
+  patente: string;
+  fechaHoraDesde?: string | Date;
+  fechaHoraHasta?: string | Date;
+  usuario?: string;
+  fechaActualizacion?: string | Date;
+  idAmbienteNavigation?: Ambiente;
+  idRelayNavigation?: Relay;
+}
+
+export interface VisualizacionGCBA {
+  idRelay: number;
+  idAmbiente: number;
+  idUnidad: string;
+  patente: string;
+  fechaHoraDesde?: string | Date;
+  fechaHoraHasta?: string | Date;
+  fechaHoraGps?: string | Date;
+  usuario?: string;
+  fechaActualizacion?: string | Date;
+  idAmbienteNavigation?: Ambiente;
+  idRelayNavigation?: Relay;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -30,6 +72,172 @@ export class RelayService {
     { id: 'LR-00122',    name: 'Legacy-Relay-01',    protocol: 'UDP', endpointUrl: 'udp://legacy.lon.net:3000',    status: 'idle',   tier: 'Secondary' },
   ];
 
+  visualizaciones: Visualizacion[] = [
+    {
+      idRelay: 1,
+      idAmbiente: 1,
+      idUnidad: 'U001',
+      patente: '032LCM',
+      fechaHoraDesde: '2024-09-27T00:00:00',
+      fechaHoraHasta: '',
+      fechaActualizacion: '',
+      idRelayNavigation: { idRelay: 1, nombre: 'SOFLEX_PBA' },
+      idAmbienteNavigation: { idAmbiente: 1, nombre: 'MEGATRANS_PRIVADOS' }
+    },
+    {
+      idRelay: 2,
+      idAmbiente: 2,
+      idUnidad: 'U002',
+      patente: 'ABC123',
+      fechaHoraDesde: '2024-10-01T08:00:00',
+      fechaHoraHasta: '2024-10-01T20:00:00',
+      fechaActualizacion: '2024-10-01T20:05:00',
+      idRelayNavigation: { idRelay: 2, nombre: 'RELAY_CENTRAL' },
+      idAmbienteNavigation: { idAmbiente: 2, nombre: 'AMBIENTE_PROD' }
+    },
+    {
+      idRelay: 3,
+      idAmbiente: 1,
+      idUnidad: 'U003',
+      patente: 'XYZ789',
+      fechaHoraDesde: '2024-11-15T14:00:00',
+      fechaHoraHasta: '',
+      fechaActualizacion: '2024-11-15T14:45:00',
+      idRelayNavigation: { idRelay: 3, nombre: 'SOFLEX_S2' },
+      idAmbienteNavigation: { idAmbiente: 1, nombre: 'MEGATRANS_PRIVADOS' }
+    },
+    {
+      idRelay: 1,
+      idAmbiente: 3,
+      idUnidad: 'U004',
+      patente: 'AAA111',
+      fechaHoraDesde: '2024-12-01T10:00:00',
+      fechaHoraHasta: '',
+      fechaActualizacion: '2024-12-01T10:05:00',
+      idRelayNavigation: { idRelay: 1, nombre: 'SOFLEX_PBA' },
+      idAmbienteNavigation: { idAmbiente: 3, nombre: 'AMBIENTE_DEV' }
+    },
+    {
+      idRelay: 2,
+      idAmbiente: 1,
+      idUnidad: 'U005',
+      patente: 'BBB222',
+      fechaHoraDesde: '2025-01-10T12:00:00',
+      fechaHoraHasta: '2025-01-10T18:00:00',
+      fechaActualizacion: '2025-01-10T18:30:00',
+      idRelayNavigation: { idRelay: 2, nombre: 'RELAY_CENTRAL' },
+      idAmbienteNavigation: { idAmbiente: 1, nombre: 'MEGATRANS_PRIVADOS' }
+    },
+    {
+      idRelay: 3,
+      idAmbiente: 2,
+      idUnidad: 'U006',
+      patente: 'CCC333',
+      fechaHoraDesde: '2025-02-05T09:00:00',
+      fechaHoraHasta: '',
+      fechaActualizacion: '2025-02-05T09:15:00',
+      idRelayNavigation: { idRelay: 3, nombre: 'SOFLEX_S2' },
+      idAmbienteNavigation: { idAmbiente: 2, nombre: 'AMBIENTE_PROD' }
+    },
+    {
+      idRelay: 1,
+      idAmbiente: 2,
+      idUnidad: 'U007',
+      patente: 'DDD444',
+      fechaHoraDesde: '2025-03-20T16:00:00',
+      fechaHoraHasta: '2025-03-20T22:00:00',
+      fechaActualizacion: '2025-03-20T22:10:00',
+      idRelayNavigation: { idRelay: 1, nombre: 'SOFLEX_PBA' },
+      idAmbienteNavigation: { idAmbiente: 2, nombre: 'AMBIENTE_PROD' }
+    },
+    {
+      idRelay: 2,
+      idAmbiente: 3,
+      idUnidad: 'U008',
+      patente: 'EEE555',
+      fechaHoraDesde: '2025-04-12T11:00:00',
+      fechaHoraHasta: '',
+      fechaActualizacion: '2025-04-12T11:20:00',
+      idRelayNavigation: { idRelay: 2, nombre: 'RELAY_CENTRAL' },
+      idAmbienteNavigation: { idAmbiente: 3, nombre: 'AMBIENTE_DEV' }
+    }
+  ];
+
+  visualizacionesGCBA: VisualizacionGCBA[] = [
+    {
+      idRelay: 1,
+      idAmbiente: 1,
+      idUnidad: 'LQUE001',
+      patente: 'LQUE001',
+      fechaHoraDesde: '2026-05-05T13:29:33',
+      fechaHoraHasta: '',
+      fechaHoraGps: '2026-05-05T17:31:12',
+      fechaActualizacion: '2026-05-05T14:45:29',
+      idRelayNavigation: { idRelay: 1, nombre: 'SOFLEX_PBA' },
+      idAmbienteNavigation: { idAmbiente: 1, nombre: 'MEGATRANS_PRIVADOS' }
+    },
+    {
+      idRelay: 2,
+      idAmbiente: 2,
+      idUnidad: 'GCBA-002',
+      patente: 'ABC123',
+      fechaHoraDesde: '2026-05-07T10:00:00',
+      fechaHoraHasta: '2026-05-07T20:00:00',
+      fechaHoraGps: '2026-05-07T18:15:00',
+      fechaActualizacion: '2026-05-07T18:18:00',
+      idRelayNavigation: { idRelay: 2, nombre: 'RELAY_CENTRAL' },
+      idAmbienteNavigation: { idAmbiente: 2, nombre: 'AMBIENTE_PROD' }
+    },
+    {
+      idRelay: 3,
+      idAmbiente: 1,
+      idUnidad: 'GCBA-003',
+      patente: 'XYZ789',
+      fechaHoraDesde: '2026-05-01T00:00:00',
+      fechaHoraHasta: '2026-05-06T00:00:00',
+      fechaHoraGps: '2026-05-05T23:50:00',
+      fechaActualizacion: '2026-05-05T23:55:00',
+      idRelayNavigation: { idRelay: 3, nombre: 'SOFLEX_S2' },
+      idAmbienteNavigation: { idAmbiente: 1, nombre: 'MEGATRANS_PRIVADOS' }
+    },
+    {
+      idRelay: 1,
+      idAmbiente: 2,
+      idUnidad: 'GCBA-004',
+      patente: 'DEF456',
+      fechaHoraDesde: '2026-05-07T08:00:00',
+      fechaHoraHasta: '',
+      fechaHoraGps: '2026-05-07T17:50:00',
+      fechaActualizacion: '2026-05-07T18:05:00',
+      idRelayNavigation: { idRelay: 1, nombre: 'SOFLEX_PBA' },
+      idAmbienteNavigation: { idAmbiente: 2, nombre: 'AMBIENTE_PROD' }
+    },
+    {
+      idRelay: 2,
+      idAmbiente: 3,
+      idUnidad: 'GCBA-005',
+      patente: 'TRN-999',
+      fechaHoraDesde: '2026-05-07T00:00:00',
+      fechaHoraHasta: '',
+      fechaHoraGps: '2026-05-07T18:37:00',
+      fechaActualizacion: '2026-05-07T18:38:00', // Active case (< 5 min ago)
+      idRelayNavigation: { idRelay: 2, nombre: 'RELAY_CENTRAL' },
+      idAmbienteNavigation: { idAmbiente: 3, nombre: 'AMBIENTE_DEV' }
+    }
+  ];
+
+  availableRelays: Relay[] = [
+    { idRelay: 1, nombre: 'SOFLEX_PBA' },
+    { idRelay: 2, nombre: 'RELAY_CENTRAL' },
+    { idRelay: 3, nombre: 'SOFLEX_S2' },
+  ];
+
+  availableAmbientes: Ambiente[] = [
+    { idAmbiente: 1, nombre: 'MEGATRANS_PRIVADOS' },
+    { idAmbiente: 2, nombre: 'AMBIENTE_PROD' },
+    { idAmbiente: 3, nombre: 'AMBIENTE_DEV' },
+  ];
+
   activityLogs: ActivityLog[] = [
     { icon: 'sync', title: 'Relay Cluster A-14 Re-synchronization', subtitle: 'Node ID: DNF-F921 · Location: Frankfurt, DE', time: '2 minutes ago', status: 'SUCCESS' },
     { icon: 'warn', title: 'Anomalous Traffic Spike Detected',       subtitle: 'Internal IP Range: 10.0.4.1/24 · Security Layer 2', time: '14 minutes ago', status: 'INVESTIGATING' },
@@ -47,4 +255,51 @@ export class RelayService {
     inbound:  [0.42, 0.31, 0.18, 0.22, 0.15, 0.08],
     outbound: [0.38, 0.28, 0.16, 0.19, 0.13, 0.07],
   };
+
+  private getLocalISOString(date: Date): string {
+    const pad = (n: number) => n.toString().padStart(2, '0');
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+  }
+
+  stopGCBA(idUnidad: string, idRelay: number, idAmbiente: number) {
+    const index = this.visualizacionesGCBA.findIndex(
+      v => v.idUnidad === idUnidad && v.idRelay === idRelay && v.idAmbiente === idAmbiente
+    );
+    if (index !== -1) {
+      const now = new Date();
+      // Set to 1 second ago to ensure it's immediately "Inactivo"
+      const stopDate = new Date(now.getTime() - 1000);
+      const stopTimeString = this.getLocalISOString(stopDate);
+      
+      this.visualizacionesGCBA[index] = {
+        ...this.visualizacionesGCBA[index],
+        fechaHoraHasta: stopTimeString,
+        fechaActualizacion: this.getLocalISOString(now),
+        usuario: 'admin_user'
+      };
+      this.visualizacionesGCBA = [...this.visualizacionesGCBA];
+    }
+  }
+
+  resumeGCBA(idUnidad: string, idRelay: number, idAmbiente: number) {
+    const index = this.visualizacionesGCBA.findIndex(
+      v => v.idUnidad === idUnidad && v.idRelay === idRelay && v.idAmbiente === idAmbiente
+    );
+    if (index !== -1) {
+      const now = this.getLocalISOString(new Date());
+      this.visualizacionesGCBA[index] = {
+        ...this.visualizacionesGCBA[index],
+        fechaHoraHasta: undefined,
+        fechaActualizacion: now,
+        usuario: 'admin_user'
+      };
+      this.visualizacionesGCBA = [...this.visualizacionesGCBA];
+    }
+  }
+
+  deleteGCBA(idUnidad: string, idRelay: number, idAmbiente: number) {
+    this.visualizacionesGCBA = this.visualizacionesGCBA.filter(
+      v => !(v.idUnidad === idUnidad && v.idRelay === idRelay && v.idAmbiente === idAmbiente)
+    );
+  }
 }
