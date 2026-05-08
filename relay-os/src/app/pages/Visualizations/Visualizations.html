@@ -20,8 +20,8 @@
     </button>
   </div>
 
-  <div class="flex items-center justify-between gap-3 p-5 animate-fade-in" style="animation-delay: 0.1s;">
-    <div class="flex items-center gap-6 animate-slide-right" style="animation-delay: 0.2s;">
+  <div class="flex items-center justify-between gap-3 p-5">
+    <div class="flex items-center gap-6">
       @if (activeTab === 'general') {
         <div class="flex items-center gap-3">
           <label class="text-[12px] font-bold text-gray-500 uppercase tracking-wider">Filtrar por Relay:</label>
@@ -82,8 +82,7 @@
       {{ activeTab === 'general' ? 'Listado Maestro' : 'Monitoreo de Transmisión GCBA' }}
     </span>
     <div
-      class="flex items-center gap-1.5 text-[12px] text-green-600 dark:text-green-400 font-medium animate-fade-in"
-      style="animation-delay: 0.3s;"
+      class="flex items-center gap-1.5 text-[12px] text-green-600 dark:text-green-400 font-medium"
     >
       <span class="w-2 h-2 rounded-full bg-green-500 inline-block"></span>
       {{ onlineCount }} Registros encontrados
@@ -93,7 +92,7 @@
   <div class="overflow-x-auto flex-1">
     @if (activeTab === 'general') {
       <!-- General Table -->
-      <table class="relay-table w-full text-left min-w-200 animate-fade-in" style="animation-delay: 0.4s;">
+      <table class="relay-table w-full text-left min-w-200">
         <thead
           class="bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider"
         >
@@ -151,7 +150,7 @@
         </thead>
         <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
           @for (vis of tableVisualizaciones; track vis.idRelay + '-' + vis.idAmbiente + '-' + vis.idUnidad) {
-            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors animate-row-entry">
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
               <td class="px-5 py-3">
                 <div class="text-[13px] font-semibold text-gray-900 dark:text-white">
                   {{ vis.patente }}
@@ -255,7 +254,7 @@
       </table>
     } @else {
       <!-- GCBA Table -->
-      <table class="relay-table w-full text-left min-w-200 animate-fade-in" style="animation-delay: 0.4s;">
+      <table class="relay-table w-full text-left min-w-200">
         <thead
           class="bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 text-[11px] uppercase tracking-wider"
         >
@@ -280,7 +279,7 @@
         <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
           @for (relay of tableVisualizacionesGCBA; track relay.idRelay + '-' + relay.idUnidad) {
             @let status = getGCBAStatus(relay);
-            <tr [class]="status.rowStyle" class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-all animate-row-entry">
+            <tr [class]="status.rowStyle" class="hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-all">
               <td class="px-5 py-4">
                 <span [class]="status.statusClass" class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-sm">
                   {{ status.label }}

@@ -27,38 +27,82 @@
   <!-- ── Relay Grid ── -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
     @for (relay of relays; track relay.id) {
-      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-5 hover:shadow-md hover:-translate-y-px transition-all duration-150 cursor-default animate-row-entry">
+      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-5 group hover:border-gray-400 dark:hover:border-gray-500 transition-all duration-300 relative overflow-hidden shadow-sm hover:shadow-md relay-card-hover">
+        <!-- Card Header -->
         <div class="flex items-start justify-between mb-4">
-          <!-- Icon -->
-          <div class="w-10 h-10 bg-gray-100 dark:bg-gray-700/50 flex items-center justify-center text-gray-500 dark:text-gray-400">
-            @if (relay.status === 'down') {
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2">
-                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
-              </svg>
-            } @else {
+          <div class="flex items-center gap-2">
+            <span [class]="getStatusBadge(relay)" class="w-2 h-2 rounded-full"></span>
+            <h3 class="text-[15px] font-bold text-gray-900 dark:text-white">{{ relay.name }}</h3>
+          </div>
+          <div class="relative">
+            <button (click)="toggleMenu(relay.id, $event)" class="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/>
-                <line x1="12" y1="7" x2="5" y2="17"/><line x1="12" y1="7" x2="19" y2="17"/>
+                <circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/>
               </svg>
+            </button>
+            
+            <!-- Action Dropdown -->
+            @if (activeMenuId === relay.id) {
+              <div class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-xl z-20 animate-in fade-in zoom-in-95 duration-200 py-1">
+                <button (click)="openDrawer('view', relay)" class="w-full flex items-center gap-3 px-4 py-2 text-[13px] text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Ver detalles
+                </button>
+                <button (click)="openDrawer('edit', relay)" class="w-full flex items-center gap-3 px-4 py-2 text-[13px] text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  Editar relay
+                </button>
+                <div class="border-t border-gray-100 dark:border-gray-700 my-1"></div>
+                <button (click)="confirmDelete(relay)" class="w-full flex items-center gap-3 px-4 py-2 text-[13px] text-white bg-red-500  transition-colors">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                  Borrar relay
+                </button>
+              </div>
             }
           </div>
-          <div class="flex items-center gap-2">
-            <span [class]="getStatusBadge(relay)">{{ getStatusLabel(relay) }}</span>
-            <button class="text-gray-300 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-300 text-lg font-bold leading-none">⋯</button>
+        </div>
+
+        <!-- Card Body -->
+        <div class="space-y-3 mb-6">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] text-gray-400 font-mono uppercase tracking-tighter">{{ relay.id }}</span>
+            <span class="px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-[10px] font-bold text-gray-600 dark:text-gray-300 rounded uppercase">{{ relay.protocol }}</span>
+          </div>
+          <div [ngClass]="relay.status === 'down' ? 'text-red-500' : 'text-gray-400'" class="text-[12px] font-medium">
+            @if (relay.status === 'down') { 
+              <div class="flex items-center gap-1">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                {{ relay.error }} 
+              </div>
+            } @else { 
+              <div class="flex items-center gap-1 text-green-600 dark:text-green-400">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                Latency: {{ relay.latency }}ms 
+              </div>
+            }
           </div>
         </div>
-        <div class="text-[15px] font-semibold text-gray-900 dark:text-white">{{ relay.name }}</div>
-        <div class="text-[11px] text-gray-400 mt-0.5 mb-3 font-mono">ID: {{ relay.id }}</div>
-        <div [ngClass]="relay.status === 'down' ? 'text-red-500' : 'text-gray-400'" class="text-[12px] font-medium">
-          @if (relay.status === 'down') { {{ relay.error }} }
-          @else { Latency: {{ relay.latency }}ms }
+
+        <!-- Card Footer -->
+        <div class="pt-4 border-t border-gray-50 dark:border-gray-700/50">
+          <div class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Last Data Transmission</div>
+          <div class="text-[12px] text-gray-600 dark:text-gray-400 flex items-center gap-1.5">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="opacity-50">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+            {{ formatDate(relay.lastEmission) }}
+          </div>
+        </div>
+
+        <!-- Decorative background element -->
+        <div class="absolute -right-4 -bottom-4 opacity-[0.03] dark:opacity-[0.05] group-hover:scale-110 transition-transform duration-700 pointer-events-none">
+          <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+          </svg>
         </div>
       </div>
     }
   </div>
-
-
 
   <!-- Footer -->
   <div class="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0 mt-8 pt-4 border-t border-gray-200 dark:border-gray-800 text-center sm:text-left">
@@ -69,3 +113,170 @@
     <span class="text-[11px] text-gray-400">© 2024 RelayOS · Executive Control Interface v4.3.1</span>
   </div>
 </div>
+
+<!-- Drawer Backdrop -->
+@if (isDrawerOpen) {
+  <div class="fixed inset-0 bg-black/40 backdrop-blur-[2px] z-40 transition-opacity animate-in fade-in duration-300" (click)="closeDrawer()"></div>
+}
+
+<!-- Right Drawer -->
+<div
+  class="fixed top-0 right-0 h-full w-full max-w-[480px] bg-white dark:bg-gray-900 shadow-[-20px_0_50px_-12px_rgba(0,0,0,0.25)] z-50 transform transition-transform duration-300 ease-out border-l border-gray-200 dark:border-gray-800"
+  [class.translate-x-full]="!isDrawerOpen"
+  [class.translate-x-0]="isDrawerOpen"
+>
+  <div class="flex flex-col h-full">
+    <!-- Drawer Header -->
+    <div class="flex items-center justify-between px-8 py-6 border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30">
+      <div>
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white tracking-tight">
+          {{ drawerMode === 'edit' ? 'Edit Relay Node' : 'Relay Node Details' }}
+        </h2>
+        <p class="text-[11px] text-gray-500 dark:text-gray-400 uppercase tracking-widest font-bold mt-1">
+          {{ drawerMode === 'view' ? 'Información de solo lectura' : 'Configuración de nodo de red' }}
+        </p>
+      </div>
+      <button (click)="closeDrawer()" class="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Drawer Body -->
+    <div class="flex-1 overflow-y-auto p-8 space-y-6">
+      <div class="space-y-2">
+        <label class="text-[12px] font-bold text-gray-500 uppercase tracking-wider">Relay Name</label>
+        <input 
+          [disabled]="drawerMode === 'view'"
+          [(ngModel)]="form.name"
+          class="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white px-4 py-3 rounded-lg text-[14px] focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:bg-gray-50 dark:disabled:bg-gray-800/50 transition-all"
+        />
+      </div>
+
+      <div class="space-y-2">
+        <label class="text-[12px] font-bold text-gray-500 uppercase tracking-wider">Endpoint URL</label>
+        <input 
+          [disabled]="drawerMode === 'view'"
+          [(ngModel)]="form.endpointUrl"
+          class="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white px-4 py-3 rounded-lg text-[14px] font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:bg-gray-50 dark:disabled:bg-gray-800/50 transition-all"
+        />
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="space-y-2">
+          <label class="text-[12px] font-bold text-gray-500 uppercase tracking-wider">Protocol</label>
+          <select 
+            [disabled]="drawerMode === 'view'"
+            [(ngModel)]="form.protocol"
+            class="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white px-4 py-3 rounded-lg text-[14px] focus:outline-none transition-all"
+          >
+            <option>TCP</option><option>UDP</option><option>HTTPS</option><option>WSS</option><option>gRPC</option>
+          </select>
+        </div>
+        <div class="space-y-2">
+          <label class="text-[12px] font-bold text-gray-500 uppercase tracking-wider">Node Tier</label>
+          <select 
+            [disabled]="drawerMode === 'view'"
+            [(ngModel)]="form.tier"
+            class="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white px-4 py-3 rounded-lg text-[14px] focus:outline-none transition-all"
+          >
+            <option>Primary</option><option>Secondary</option><option>Edge</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <label class="text-[12px] font-bold text-gray-500 uppercase tracking-wider">Description</label>
+        <textarea 
+          rows="4"
+          [disabled]="drawerMode === 'view'"
+          [(ngModel)]="form.description"
+          class="w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white px-4 py-3 rounded-lg text-[14px] focus:outline-none transition-all resize-none"
+        ></textarea>
+      </div>
+
+      @if (drawerMode === 'view' && selectedRelay) {
+        <div class="p-5 bg-blue-50 dark:bg-blue-900/10 border border-blue-100 dark:border-blue-800/30 rounded-xl">
+          <div class="flex gap-4">
+            <div class="text-blue-600 mt-0.5">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            </div>
+            <div class="text-[13px] text-blue-800 dark:text-blue-300">
+              <span class="font-bold block mb-1">Operational Audit</span>
+              This node was last updated on {{ formatDate(selectedRelay.lastEmission) }}. No anomalies detected in current traffic patterns.
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="p-8 border-t border-gray-100 dark:border-gray-800 bg-gray-50/30 dark:bg-gray-800/10 flex items-center gap-4">
+      <button (click)="closeDrawer()" class="flex-1 px-6 py-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-[13px] font-bold hover:bg-white dark:hover:bg-gray-800 transition-all">
+        {{ drawerMode === 'view' ? 'Cerrar' : 'Cancelar' }}
+      </button>
+      @if (drawerMode !== 'view') {
+        <button (click)="saveRelay()" class="flex-1 px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg text-[13px] font-bold transition-all shadow-lg active:scale-[0.98]">
+          Save Changes
+        </button>
+      }
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+@if (toast.show) {
+  <div
+    class="fixed bottom-8 right-8 z-[100] flex items-center gap-3 px-5 py-3 rounded-xl shadow-2xl border animate-in slide-in-from-right-full duration-300"
+    [class.bg-green-500]="toast.type === 'success'"
+    [class.border-green-600]="toast.type === 'success'"
+    [class.bg-blue-600]="toast.type === 'info'"
+    [class.border-blue-700]="toast.type === 'info'"
+    [class.bg-red-600]="toast.type === 'danger'"
+    [class.border-red-700]="toast.type === 'danger'"
+  >
+    <div class="p-1 bg-white/20 rounded-lg">
+      @if (toast.type === 'success') {
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      } @else if (toast.type === 'info') {
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      } @else {
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+      }
+    </div>
+    <div class="text-white">
+      <p class="text-[13px] font-bold">{{ toast.message }}</p>
+    </div>
+    <button (click)="toast.show = false" class="ml-4 text-white/60 hover:text-white">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+}
+
+<!-- Delete Confirmation Modal -->
+@if (showDeleteModal) {
+  <div class="fixed inset-0 z-[110] flex items-center justify-center p-4">
+    <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm animate-in fade-in duration-300" (click)="cancelDelete()"></div>
+    <div class="relative bg-white dark:bg-gray-900 w-full max-w-md rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-800 p-8 animate-in zoom-in-95 duration-200">
+      <div class="flex flex-col items-center text-center">
+        <div class="w-16 h-16 bg-red-50 dark:bg-red-900/20 rounded-full flex items-center justify-center mb-6">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Confirm Delete</h3>
+        <p class="text-gray-500 dark:text-gray-400 text-[14px] leading-relaxed">
+          Are you sure you want to delete <span class="font-bold text-gray-900 dark:text-white">{{ relayToDelete?.name }}</span>? This operation will disconnect the node from the mesh network.
+        </p>
+      </div>
+      <div class="grid grid-cols-2 gap-3 mt-8">
+        <button (click)="cancelDelete()" class="px-6 py-3 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-xl text-[14px] font-bold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">
+          No, cancel
+        </button>
+        <button (click)="deleteRelay()" class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-xl text-[14px] font-bold transition-all shadow-lg shadow-red-500/20">
+          Yes, delete
+        </button>
+      </div>
+    </div>
+  </div>
+}
+

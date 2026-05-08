@@ -9,6 +9,8 @@ export interface RelayNode {
   latency?: number;
   error?: string;
   tier: 'Primary' | 'Secondary' | 'Edge';
+  description?: string;
+  lastEmission?: string;
 }
 
 export interface ActivityLog {
@@ -57,19 +59,19 @@ export interface VisualizacionGCBA {
 @Injectable({ providedIn: 'root' })
 export class RelayService {
   relays: RelayNode[] = [
-    { id: 'RN-A-001-9X', name: 'Relay North-Alpha', protocol: 'TCP', endpointUrl: 'tcp://relay.us-east.net:8080', status: 'active', latency: 12, tier: 'Primary' },
-    { id: 'RN-B-002-4I', name: 'Relay North-Beta',  protocol: 'UDP', endpointUrl: 'udp://relay.us-east.net:9001', status: 'active', latency: 18, tier: 'Primary' },
-    { id: 'RS-G-095-1Z', name: 'Relay South-Gamma', protocol: 'TCP', endpointUrl: 'tcp://relay.sa-south.net:443',  status: 'down',   error: 'Connection Lost: 4m ago', tier: 'Edge' },
-    { id: 'RE-D-016-7L', name: 'Relay East-Delta',  protocol: 'TCP', endpointUrl: 'tcp://relay.eu-east.net:8080', status: 'active', latency: 9,  tier: 'Primary' },
-    { id: 'RW-E-055-3M', name: 'Relay West-Epsilon',protocol: 'UDP', endpointUrl: 'udp://bridge.fra-1.net:9001',  status: 'active', latency: 22, tier: 'Secondary' },
-    { id: 'RC-Z-102-8R', name: 'Relay Central-Zeta',protocol: 'TCP', endpointUrl: 'tcp://relay.eu-west.net:8080', status: 'active', latency: 5,  tier: 'Primary' },
-    { id: 'RC-H-103-2E', name: 'Relay Central-Eta', protocol: 'UDP', endpointUrl: 'udp://relay.eu-cent.net:9001', status: 'active', latency: 7,  tier: 'Secondary' },
-    { id: 'RN-T-204-5K', name: 'Relay North-Theta', protocol: 'TCP', endpointUrl: 'tcp://auth.ap-south.net:443',  status: 'down',   error: 'Authentication Error', tier: 'Edge' },
-    { id: 'RE-I-615-1V', name: 'Relay East-Iota',   protocol: 'TCP', endpointUrl: 'tcp://relay.ap-east.net:8080', status: 'active', latency: 14, tier: 'Primary' },
-    { id: 'ER-04922',    name: 'Edge-Relay-North',   protocol: 'TCP', endpointUrl: 'tcp://relay.us-east.net:8080', status: 'active', latency: 11, tier: 'Edge' },
-    { id: 'CB-12994',    name: 'Core-Bridge-Delta',  protocol: 'UDP', endpointUrl: 'udp://bridge.fra-1.net:9001',  status: 'active', latency: 8,  tier: 'Secondary' },
-    { id: 'AR-99031',    name: 'Auth-Relay-S2',      protocol: 'TCP', endpointUrl: 'tcp://auth.ap-south.net:443',  status: 'down',   error: 'Connection Lost', tier: 'Edge' },
-    { id: 'LR-00122',    name: 'Legacy-Relay-01',    protocol: 'UDP', endpointUrl: 'udp://legacy.lon.net:3000',    status: 'idle',   tier: 'Secondary' },
+    { id: 'RN-A-001-9X', name: 'Relay North-Alpha', protocol: 'TCP', endpointUrl: 'tcp://relay.us-east.net:8080', status: 'active', latency: 12, tier: 'Primary', lastEmission: '2024-05-07T18:30:00', description: 'Primary relay for North Alpha region.' },
+    { id: 'RN-B-002-4I', name: 'Relay North-Beta',  protocol: 'UDP', endpointUrl: 'udp://relay.us-east.net:9001', status: 'active', latency: 18, tier: 'Primary', lastEmission: '2024-05-07T18:25:00', description: 'Redundant node for North region.' },
+    { id: 'RS-G-095-1Z', name: 'Relay South-Gamma', protocol: 'TCP', endpointUrl: 'tcp://relay.sa-south.net:443',  status: 'down',   error: 'Connection Lost: 4m ago', tier: 'Edge', lastEmission: '2024-05-07T18:00:00', description: 'Edge relay for South Gamma region.' },
+    { id: 'RE-D-016-7L', name: 'Relay East-Delta',  protocol: 'TCP', endpointUrl: 'tcp://relay.eu-east.net:8080', status: 'active', latency: 9,  tier: 'Primary', lastEmission: '2024-05-07T18:35:00', description: 'Main East corridor relay.' },
+    { id: 'RW-E-055-3M', name: 'Relay West-Epsilon',protocol: 'UDP', endpointUrl: 'udp://bridge.fra-1.net:9001',  status: 'active', latency: 22, tier: 'Secondary', lastEmission: '2024-05-07T18:15:00', description: 'Secondary bridge for West traffic.' },
+    { id: 'RC-Z-102-8R', name: 'Relay Central-Zeta',protocol: 'TCP', endpointUrl: 'tcp://relay.eu-west.net:8080', status: 'active', latency: 5,  tier: 'Primary', lastEmission: '2024-05-07T18:38:00', description: 'Central Zeta core node.' },
+    { id: 'RC-H-103-2E', name: 'Relay Central-Eta', protocol: 'UDP', endpointUrl: 'udp://relay.eu-cent.net:9001', status: 'active', latency: 7,  tier: 'Secondary', lastEmission: '2024-05-07T18:22:00', description: 'Secondary Eta node.' },
+    { id: 'RN-T-204-5K', name: 'Relay North-Theta', protocol: 'TCP', endpointUrl: 'tcp://auth.ap-south.net:443',  status: 'down',   error: 'Authentication Error', tier: 'Edge', lastEmission: '2024-05-07T17:45:00', description: 'Edge Theta authentication node.' },
+    { id: 'RE-I-615-1V', name: 'Relay East-Iota',   protocol: 'TCP', endpointUrl: 'tcp://relay.ap-east.net:8080', status: 'active', latency: 14, tier: 'Primary', lastEmission: '2024-05-07T18:10:00', description: 'Primary East Iota relay.' },
+    { id: 'ER-04922',    name: 'Edge-Relay-North',   protocol: 'TCP', endpointUrl: 'tcp://relay.us-east.net:8080', status: 'active', latency: 11, tier: 'Edge', lastEmission: '2024-05-07T18:05:00', description: 'Edge relay North.' },
+    { id: 'CB-12994',    name: 'Core-Bridge-Delta',  protocol: 'UDP', endpointUrl: 'udp://bridge.fra-1.net:9001',  status: 'active', latency: 8,  tier: 'Secondary', lastEmission: '2024-05-07T18:12:00', description: 'Core bridge Delta.' },
+    { id: 'AR-99031',    name: 'Auth-Relay-S2',      protocol: 'TCP', endpointUrl: 'tcp://auth.ap-south.net:443',  status: 'down',   error: 'Connection Lost', tier: 'Edge', lastEmission: '2024-05-07T17:30:00', description: 'Auth relay S2.' },
+    { id: 'LR-00122',    name: 'Legacy-Relay-01',    protocol: 'UDP', endpointUrl: 'udp://legacy.lon.net:3000',    status: 'idle',   tier: 'Secondary', lastEmission: '2024-05-07T16:00:00', description: 'Legacy relay 01.' },
   ];
 
   visualizaciones: Visualizacion[] = [
